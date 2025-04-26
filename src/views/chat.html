@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Site</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="site-info">
+                    <h2>Chat Site</h2>
+                    <span id="currentUser">Loading...</span>
+                </div>
+                <div class="user-actions">
+                    <button id="searchBtn" class="icon-btn" title="Search Users">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                </div>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="online">Online Users</button>
+                <button class="tab-btn" data-tab="inbox">Inbox</button>
+            </div>
+            <div class="users-list" id="usersList">
+                <h2>Online Users</h2>
+                <!-- Users will be dynamically added here -->
+            </div>
+            <div class="inbox-list" id="inboxList" style="display: none;">
+                <h2>Inbox</h2>
+                <!-- Conversations will be dynamically added here -->
+            </div>
+        </div>
+        <div class="chat-area">
+            <div class="chat-header">
+                <h2 id="chatWith">Select a user to chat with</h2>
+                <button id="reportBtn" class="report-btn" style="display: none;">Report User</button>
+            </div>
+            <div class="messages" id="messages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+            <div class="message-input">
+                <form id="messageForm">
+                    <input type="text" id="messageInput" placeholder="Select a user to chat..." disabled>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Panel -->
+    <div id="searchPanel" class="search-panel">
+        <div class="search-panel-header">
+            <h3>Search Users</h3>
+            <button id="closeSearchBtn" class="icon-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-filters">
+            <div class="search-input-group">
+                <input type="text" id="searchNickname" placeholder="Search by nickname...">
+            </div>
+            <div class="filter-group">
+                <label>Sex:</label>
+                <select id="searchSex">
+                    <option value="">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Country:</label>
+                <select id="searchCountry">
+                    <option value="">All</option>
+                    <option value="United Arab Emirates">UAE</option>
+                    <option value="United States">USA</option>
+                    <option value="United Kingdom">UK</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="India">India</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Japan">Japan</option>
+                    <option value="China">China</option>
+                    <option value="Russia">Russia</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Finland">Finland</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Vietnam">Vietnam</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Qatar">Qatar</option>
+                    <option value="Kuwait">Kuwait</option>
+                    <option value="Oman">Oman</option>
+                    <option value="Bahrain">Bahrain</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Age Range:</label>
+                <div class="age-range">
+                    <input type="number" id="minAge" placeholder="Min" min="0">
+                    <span>to</span>
+                    <input type="number" id="maxAge" placeholder="Max" min="0">
+                </div>
+            </div>
+        </div>
+        <div class="search-actions">
+            <button id="searchSubmitBtn" class="search-btn">Search</button>
+        </div>
+    </div>
+
+    <!-- Report User Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <h2>Report User</h2>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="reportReason">Reason for reporting:</label>
+                    <textarea id="reportReason" required></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="submit-btn">Submit Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
+</html> 
